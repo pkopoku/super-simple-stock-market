@@ -1,113 +1,172 @@
+"""For the family of Screen classes"""
 from abc import ABC, abstractmethod
-from models.stock.StockFunctions import dividendYield, peRatio, volumeWeightedStockPrice, allShareIndex, getStock, getPrice, getTrade
-from models.screen import Banners 
-from models.Trade import Trade
+from models.stock.StockFunctions import dividend_yield, pe_ratio
+from models.stock.StockFunctions import volume_weighted_stock_price
+from models.stock.StockFunctions import all_share_index, get_stock
+from models.stock.StockFunctions import get_price, get_trade
+from models.screen import Banners
 import models.Transactions as Transactions
 
+
 class Screen(ABC):
+    """
+    Abstract Screen template class
+
+    Attributes:
+        banner (str): The main display banner
+    """
     def __init__(self, banner):
         super().__init__()
         self.banner = banner
-    
+
     @abstractmethod
-    def displayScreen(self):
-        print(self.banner)
-    
+    def display_screen(self):
+        """override to display main screen"""
+        raise NotImplementedError()
+
     @abstractmethod
     def run(self):
+        """override to implement screen logic"""
         raise NotImplementedError()
+
 
 #region NavigationScreens
 class MainScreen(Screen):
-    def displayScreen(self):
-        return super().displayScreen()
-    
+    """
+    Concrete implementation of main screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
+
     def run(self):
-        self.displayScreen()
+        self.display_screen()
 
         print(Banners.MAIN_MENU)
         choice = input()
 
         return choice
 
+
 class InvalidInputScreen(Screen):
-    def displayScreen(self):
-        return super().displayScreen()
+    """
+    Concrete implementation of invalid input screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
 
     def run(self):
-        self.displayScreen()
+        self.display_screen()
+
 
 class ExitScreen(Screen):
-    def displayScreen(self):
-        return super().displayScreen()
-    
+    """
+    Concrete implementation of exit screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
+
     def run(self):
-        self.displayScreen()
+        self.display_screen()
 #endregion
+
 
 #region Function Screens
 class DividendYieldScreen(Screen):
-    
-    def displayScreen(self):
-        return super().displayScreen()
+    """
+    Concrete implementation of div yield screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
 
     def run(self):
-        self.displayScreen()
-        
-        stock, price = getStock(), getPrice()
+        self.display_screen()
+        stock, price = get_stock(), get_price()
+        div_yield = dividend_yield(stock, price)
 
-        dy = dividendYield(stock, price)
+        print("{0} : {1}"
+              .format(Banners.DIVIDEND_YIELD_PROMPT_RESULT, div_yield))
 
-        print("{0} : {1}".format(Banners.DIVIDEND_YIELD_PROMPT_RESULT, dy))
 
 class PeRatioScreen(Screen):
-    
-    def displayScreen(self):
-        return super().displayScreen()
+    """
+    Concrete implementation of p/e ratio screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
 
     def run(self):
-        self.displayScreen()
-        
-        stock, price = getStock(), getPrice()
+        self.display_screen()
+        stock, price = get_stock(), get_price()
+        ratio = pe_ratio(stock, price)
 
-        pe = peRatio(stock, price)
+        print("{0} : {1}".format(Banners.PE_RATIO_PROMPT_RESULT, ratio))
 
-        print("{0} : {1}".format(Banners.PE_RATIO_PROMPT_RESULT, pe))
 
 class RecordTradeScreen(Screen):
-    def displayScreen(self):
-        return super().displayScreen()
+    """
+    Concrete implementation of trading screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
 
     def run(self):
-        self.displayScreen()
-        
-        stock = getStock()
-        trade = getTrade(stock)
-        Transactions.addTransaction(stock, trade)
+        self.display_screen()
+        stock = get_stock()
+        trade = get_trade(stock)
+        Transactions.add_transaction(stock, trade)
 
         print(Banners.RECORD_TRADE_RESULT_COMPLETE)
 
+
 class VolumeWeightedStockPrice(Screen):
-    def displayScreen(self):
-        return super().displayScreen()
-    
+    """
+    Concrete implementation of vol. weighted stock screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
+
     def run(self):
-        self.displayScreen()
+        self.display_screen()
+        stock = get_stock()
+        vol_weight_stock_price = volume_weighted_stock_price(stock)
 
-        stock = getStock()
-        vwsp = volumeWeightedStockPrice(stock)
+        print("{0} : {1}".format(Banners.VOL_WEIGHT_RESULT, vol_weight_stock_price))
 
-        print("{0} : {1}".format(Banners.VOL_WEIGHT_RESULT, vwsp))
 
 class AllShareIndexScreen(Screen):
-    def displayScreen(self):
-        return super().displayScreen()
-    
+    """
+    Concrete implementation of All Share Index screen
+
+    Attributes:
+        banner (str): The main display banner
+    """
+    def display_screen(self):
+        print(self.banner)
+
     def run(self):
-        self.displayScreen()
+        self.display_screen()
+        as_index = all_share_index()
 
-        asi = allShareIndex()
-
-        print("{0} : {1}".format(Banners.ALL_SHARE_RESULT, asi))
+        print("{0} : {1}".format(Banners.ALL_SHARE_RESULT, as_index))
 #endregion
-

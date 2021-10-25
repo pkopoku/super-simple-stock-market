@@ -1,6 +1,10 @@
-from models.screen.Screen import DividendYieldScreen, PeRatioScreen, RecordTradeScreen, VolumeWeightedStockPrice, AllShareIndexScreen, ExitScreen, MainScreen, InvalidInputScreen
-from models.screen import Banners 
-
+"""This is the entry point for the Super Simple Stock Market"""
+import sys
+from models.screen.Screen import DividendYieldScreen, PeRatioScreen
+from models.screen.Screen import RecordTradeScreen
+from models.screen.Screen import VolumeWeightedStockPrice, AllShareIndexScreen
+from models.screen.Screen import ExitScreen, MainScreen, InvalidInputScreen
+from models.screen import Banners
 
 if __name__ == "__main__":
 
@@ -32,4 +36,4 @@ if __name__ == "__main__":
             screen = InvalidInputScreen(Banners.INVALID_BANNER)
             screen.run()
 
-    exit(0)
+    sys.exit()

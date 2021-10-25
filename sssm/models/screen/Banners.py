@@ -1,3 +1,5 @@
+"""A collection of string prompts"""
+
 #region
 MAIN_BANNER = """
     Welcome to the Global Beverage Corporation Exchange (GBCE)
