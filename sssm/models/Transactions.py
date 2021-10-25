@@ -27,10 +27,8 @@ class Cummulation:
         """returns number of transactions"""
         return self.num_transactions
 
-_CUMMULATIVE_PRICE_PRODUCT = 1
-_NUMBER_OF_TRANSACTIONS = 0
 
-ACCUMULATOR = Cummulation(_CUMMULATIVE_PRICE_PRODUCT, _NUMBER_OF_TRANSACTIONS)
+ACCUMULATOR = Cummulation(1, 0)
 
 def _get_recent_trades(trades, time_delta_in_minutes=15):
     def get_index_at_delta_start(trades, key):
@@ -65,8 +63,6 @@ def add_transaction(stock, trade):
 
     ACCUMULATOR.accumulate(trade.trade_price)
 
-    # _CUMMULATIVE_PRICE_PRODUCT *= trade.trade_price
-    # _NUMBER_OF_TRANSACTIONS += 1
 
 def get_all_share_index():
     """Calculates All Share Index
