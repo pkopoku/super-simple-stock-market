@@ -35,3 +35,8 @@ python sssm\main.py
 ```sh
 python -m unittest discover
 ```
+
+# Notes
+
+Linting done with `pycodelint`:
+``` $ pycodestyle {source_file_or_directory} ```
