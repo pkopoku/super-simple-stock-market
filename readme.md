@@ -17,6 +17,10 @@ It might be worth running this in an isolated environment. <br> Create a virtual
 | Windows  | cmd.exe  | ``` py -3.7 -m venv path/to/your/venv```  | C:\\> \<venv\>\Scripts\activate.bat     |
 
 Or see the [pydoc](https://docs.python.org/3/library/venv.html) for more information
+
+After activating your virtual environment, you can run the following command to include any dependencies/tools to your environment:
+```$ pip install -r requirements.txt```
+
 # Usage
 
 ## Running the Stock Market
