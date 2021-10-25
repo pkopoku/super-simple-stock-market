@@ -32,11 +32,9 @@ class TestTransactions(unittest.TestCase):
         allTrades = [trade1, trade2, trade3, trade4, trade5]
         #endregion
 
-        #region expected result
-        result = [trade4, trade5]
-        #endregion
-
-        self.assertEqual(result, Transactions._getRecentTrades(trades=allTrades))
+        recentTrades = Transactions._getRecentTrades(trades=allTrades)
+        self.assertTrue(2 <= len(recentTrades) <= len(allTrades))
+        self.assertTrue(trade4 in recentTrades and trade5 in recentTrades)
     
     def test_getRecentTradesNoTrades(self):
         self.assertEqual([], Transactions._getRecentTrades(trades=[]))
